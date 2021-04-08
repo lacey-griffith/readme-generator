@@ -17,17 +17,41 @@ const generateReadMe = require('./src/page-template')
 // const readMe = generateReadMe();
 const userQuestions = () => {
     return inquirer.prompt([{
-        name: "git_username",
-        type: "input",
-        message: "Enter your GitHub username:"
+        name: 'git_username',
+        type: 'input',
+        message: 'Enter your GitHub username:',
+        validate: gitHubNameInput => {
+            if (gitHubNameInput) {
+                return true
+            } else {
+                console.log('Enter your GitHub username!')
+                return false
+            }
+        }
     }, {
-        name: "git_url",
-        type: "input",
-        message: "Enter your GitHub project's URL:"
+        name: 'git_url',
+        type: 'input',
+        message: 'Enter your GitHub project URL: ',
+        validate: projectURLInput => {
+            if (projectURLInput) {
+                return true
+            } else {
+                console.log('Enter your project URL!')
+                return false
+            }
+        }
     }, {
-        name: "email",
-        type: "input",
-        message: "Enter your email address:"
+        name: 'email',
+        type: 'input',
+        message: 'Enter your email address:',
+        validate: emailInput => {
+            if (emailInput) {
+                return true
+            } else {
+                console.log('Enter your email address!')
+                return false
+            }
+        }
     }])
 };
 const projectQuestions = userData => {
@@ -38,43 +62,65 @@ const projectQuestions = userData => {
     **** Add README.md ****
     `);
     return inquirer.prompt([{
-                name: "project_title",
-                type: "input",
-                message: "What is the title of your project?"
+                name: 'project_title',
+                type: 'input',
+                message: 'What is the title of your project?',
+                validate: TitleInput => {
+                    if (TitleInput) {
+                        return true
+                    } else {
+                        console.log('Enter your project title!')
+                        return false
+                    }
+                }
             }, {
-                name: "description",
-                type: "input",
-                message: "Describe your project:"
+                name: 'description',
+                type: 'input',
+                message: 'Describe your project:'
             }, {
-                name: "install",
-                type: "input",
-                message: "What are the installation instructions?",
+                name: 'installConfirm',
+                type: 'confirm',
+                default: false,
+                message: 'Do you want to include installation instructions?',
             }, {
-                name: "usage",
-                type: "input",
-                message: "What is the usage information?",
+                name: 'install',
+                type: 'input',
+                message: 'Proivde installation instructions:',
+                when: ({
+                    installConfirm
+                }) => {
+                    if (installConfirm) {
+                        return true
+                    } else {
+                        return false
+                    }
+                }
             }, {
-                name: "contributions",
-                type: "input",
-                message: "Who made contributions?"
+                name: 'usage',
+                type: 'input',
+                message: 'Do you want to include usage information?',
             }, {
-                name: "testing",
-                type: "input",
-                message: "What are the testing instructions?"
+                name: 'contributions',
+                type: 'input',
+                message: 'Who made contributions?'
             }, {
-                name: "licensing",
-                type: "checkbox",
-                message: "Which license(s) would you like to include?",
-                choices: ['MIT', 'Apache', 'Boost', 'Eclipse', 'ISC']
+                name: 'testing',
+                type: 'input',
+                message: 'Are there testing instructions?'
             }, {
-                name: "site_image",
-                type: "input",
-                message: "To include a site image, enter the image path:"
+                name: 'licensing',
+                type: 'checkbox',
+                message: 'Select license(s) for this project.',
+                choices: ['MIT', 'Apache', 'Boost', 'Eclipse', 'ISC', 'None']
+            }, {
+                name: 'site_image',
+                type: 'input',
+                message: 'To include a site image, enter the image path:'
             },
             {
-                name: "addREADME",
-                type: "confirm",
-                message: "Would you like to create another README.md?",
+                name: 'addREADME',
+                type: 'confirm',
+                message: 'Would you like to create another README.md?',
                 default: false
             }
         ])
