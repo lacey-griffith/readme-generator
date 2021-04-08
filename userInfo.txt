@@ -1,0 +1,18 @@
+{
+	"project_title": "a",
+	"description": "b",
+	"install": "c",
+	"usage": "d",
+	"contributions": "e",
+	"testing": "f",
+	"licensing": [
+		"MIT",
+		"Apache",
+		"Boost",
+		"Eclipse",
+		"ISC"
+	],
+	"git_username": "g",
+	"git_url": "h",
+	"email": "i"
+}

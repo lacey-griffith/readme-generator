@@ -11,6 +11,10 @@
 const fs = require('fs')
 const inquirer = require('inquirer')
 
+// const generateReadMe = require('./src/page-template.js')
+
+// const readMe = generateReadMe();
+
 // const readMeData = process.argv.slice(2)
 // const [githubName, githubProject] = readMeData
 const q1 = {
@@ -50,12 +54,12 @@ const q7 = {
     choices: ['MIT', 'Apache', 'Boost', 'Eclipse', 'ISC']
 }
 const q8 = {
-    name: "git-username",
+    name: "git_username",
     type: "input",
     message: "Please enter your GitHub username."
 }
 const q9 = {
-    name: "git-url",
+    name: "git_url",
     type: "input",
     message: "Please enter your GitHub project's URL."
 }
@@ -65,36 +69,17 @@ const q10 = {
     message: "Please enter your email address."
 }
 
-inquirer.prompt([q1,q2,q3,q4,q5,q6,q7,q8,q9,q10])
-.then( function(data) {
-    console.log(data)
-    fs.writeFile('userInfo.txt', JSON.stringify(data, null, '\t'), err => {
-        if(err) throw err;
-    }
-)})
-.catch(err => {console.log("Error")})
-
-
-// const createPage = () => {
-//         return `
-//     # TITLE
-
-//     **Description**
-
-//     **Technologies**
-
+const askQuestions = () => {
+    return inquirer.prompt([q1, q2, q3, q4, q5, q6, q7, q8, q9, q10])
+}
     
-//     **URL**
-    
-//     ![Site Image](IMAGEPATH)
-    
-    
-//     **Contributions**
-//     `;
-//     }
+askQuestions().then(function(data) {
+        console.log(data)
 
-
-// fs.writeFile('README.md', displayQuestions(), err => {
-//     if (err) throw err;
-//     console.log("README created!");
-// });
+        fs.writeFile('userInfo.txt', JSON.stringify(data, null, '\t'), err => {
+            if (err) throw err;
+        })
+    })
+    .catch(err => {
+        console.log("Error")
+    })
