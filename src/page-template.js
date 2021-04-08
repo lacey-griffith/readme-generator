@@ -1,12 +1,40 @@
-const generateReadMe = () => {
-    console.log(questionAnswers)
+module.exports = pageData => {
+    const {
+        git_username,
+        email,
+        git_url,
+        ...questions
+    } = pageData
 
-    fs.writeFile('userInfo.txt', JSON.stringify(data, null, '\t'), err => {
-            if (err) throw err;
-        })
-        .catch(err => {
-            console.log("Error")
-        })
-}
+    // console.log(git_username)
+    // console.log(email)
+    // console.log(git_url)
+    return `
+    #${pageData.projectInfo.project_title}
 
-module.exports = generateReadMe;
+    **Description**
+    ${pageData.projectInfo.description}
+
+    **Table Of Contents**
+
+
+    **Installation**
+
+
+    **Usage**
+
+
+    **License**
+
+
+    **Contributions**
+
+
+    **Testing**
+
+
+    **Questions**
+    If you have any questions please contact me at ${email}.
+    You can also visit my GitHub profile by clicking [here.](https://github.com/${git_username}).
+`;
+};

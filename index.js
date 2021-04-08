@@ -12,48 +12,55 @@ const fs = require('fs')
 const inquirer = require('inquirer')
 const generateReadMe = require('./src/page-template')
 
-// const generateReadMe = require('./src/page-template.js')
+const mockData = {
+    git_username: 'lacey-griffith',
+    git_url: 'www.github.com/lacey-griffith',
+    email: 'lacey.griffith@g.austincc.edu',
+    projectInfo: [{
+        project_title: 'Read Me Gen'
+    }]
+}
 
-// const readMe = generateReadMe();
-const userQuestions = () => {
-    return inquirer.prompt([{
-        name: 'git_username',
-        type: 'input',
-        message: 'Enter your GitHub username:',
-        validate: gitHubNameInput => {
-            if (gitHubNameInput) {
-                return true
-            } else {
-                console.log('Enter your GitHub username!')
-                return false
-            }
-        }
-    }, {
-        name: 'git_url',
-        type: 'input',
-        message: 'Enter your GitHub project URL: ',
-        validate: projectURLInput => {
-            if (projectURLInput) {
-                return true
-            } else {
-                console.log('Enter your project URL!')
-                return false
-            }
-        }
-    }, {
-        name: 'email',
-        type: 'input',
-        message: 'Enter your email address:',
-        validate: emailInput => {
-            if (emailInput) {
-                return true
-            } else {
-                console.log('Enter your email address!')
-                return false
-            }
-        }
-    }])
-};
+// const userQuestions = () => {
+//     return inquirer.prompt([{
+//         name: 'git_username',
+//         type: 'input',
+//         message: 'Enter your GitHub username:',
+//         validate: gitHubNameInput => {
+//             if (gitHubNameInput) {
+//                 return true
+//             } else {
+//                 console.log('Enter your GitHub username!')
+//                 return false
+//             }
+//         }
+//     }, {
+//         name: 'git_url',
+//         type: 'input',
+//         message: 'Enter your GitHub project URL: ',
+//         validate: projectURLInput => {
+//             if (projectURLInput) {
+//                 return true
+//             } else {
+//                 console.log('Enter your project URL!')
+//                 return false
+//             }
+//         }
+//     }, {
+//         name: 'email',
+//         type: 'input',
+//         message: 'Enter your email address:',
+//         validate: emailInput => {
+//             if (emailInput) {
+//                 return true
+//             } else {
+//                 console.log('Enter your email address!')
+//                 return false
+//             }
+//         }
+//     }])
+// };
+
 const projectQuestions = userData => {
     if (!userData.projectInfo) {
         userData.projectInfo = [];
@@ -74,9 +81,24 @@ const projectQuestions = userData => {
                     }
                 }
             }, {
+                name: 'descriptionConfirm',
+                type: 'confirm',
+                default: true,
+                message: 'Do you want to add a description?'
+            }, {
                 name: 'description',
                 type: 'input',
-                message: 'Describe your project:'
+                message: 'Enter the description:',
+                when: ({
+                    descriptionConfirm
+                }) => {
+                    if (descriptionConfirm) {
+                        return true
+                    } else {
+                        return false
+                    }
+                }
+
             }, {
                 name: 'installConfirm',
                 type: 'confirm',
@@ -85,7 +107,7 @@ const projectQuestions = userData => {
             }, {
                 name: 'install',
                 type: 'input',
-                message: 'Proivde installation instructions:',
+                message: 'Enter installation instructions:',
                 when: ({
                     installConfirm
                 }) => {
@@ -96,18 +118,48 @@ const projectQuestions = userData => {
                     }
                 }
             }, {
+                name: 'usageConfirm',
+                type: 'confirm',
+                message: 'Do you want to include usage information?',
+            },
+            {
                 name: 'usage',
                 type: 'input',
-                message: 'Do you want to include usage information?',
-            }, {
+                message: 'Enter usage information:',
+                when: ({
+                    usageConfirm
+                }) => {
+                    if (usageConfirm) {
+                        return true
+                    } else {
+                        return false
+                    }
+                }
+            },
+            {
                 name: 'contributions',
                 type: 'input',
                 message: 'Who made contributions?'
             }, {
-                name: 'testing',
-                type: 'input',
+                name: 'testConfirm',
+                type: 'confirm',
                 message: 'Are there testing instructions?'
-            }, {
+            },
+            {
+                name: 'test',
+                type: 'input',
+                message: 'Enter testing instructions:',
+                when: ({
+                    testConfirm
+                }) => {
+                    if (testConfirm) {
+                        return true
+                    } else {
+                        return false
+                    }
+                }
+            },
+            {
                 name: 'licensing',
                 type: 'checkbox',
                 message: 'Select license(s) for this project.',
@@ -134,8 +186,15 @@ const projectQuestions = userData => {
         })
 };
 
-userQuestions()
-    .then(projectQuestions)
-    .then(userData => {
-        console.log(userData)
-    })
+// userQuestions()
+//     .then(projectQuestions)
+//     .then(userData => {
+//         const readme = generateReadMe(userData)
+
+//         fs.writeFile('README.md', readme, err => {
+//             if (err) throw err;
+//             console.log("README.md created!");
+//         });
+//     });
+
+const readme = generateReadMe(mockData)
