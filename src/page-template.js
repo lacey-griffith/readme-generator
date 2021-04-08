@@ -1,5 +1,5 @@
-const generateReadMe = (answers) => {
-    //console.log(answers)
+const generateReadMe = () => {
+    console.log(questionAnswers)
 
     fs.writeFile('userInfo.txt', JSON.stringify(data, null, '\t'), err => {
             if (err) throw err;

@@ -1,18 +1,15 @@
 {
-	"project_title": "a",
-	"description": "b",
-	"install": "c",
-	"usage": "d",
-	"contributions": "e",
-	"testing": "f",
+	"project_title": "Read Me Gen",
+	"description": "an application that generates a ReadMe for projects",
+	"install": "Input data and save the file I think",
+	"usage": "Use per project created",
+	"contributions": "LJ",
+	"testing": "None",
 	"licensing": [
-		"MIT",
-		"Apache",
-		"Boost",
-		"Eclipse",
-		"ISC"
+		"MIT"
 	],
-	"git_username": "g",
-	"git_url": "h",
-	"email": "i"
+	"git_username": "lacey-griffith",
+	"git_url": "github.com",
+	"email": "lacey@gmail.com",
+	"site_image": "\"./image.png\""
 }
