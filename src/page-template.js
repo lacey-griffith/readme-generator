@@ -1,31 +1,67 @@
-    module.exports = pageData => {
-        //console.log(pageData)
-        const {
-            git_username,
-            email,
-            git_url,
-            ...questions
-        } = pageData
+const createInstall = installInfo => {
+    if (!installInfo) {
+        return ``;
+    }
+    return `
 
-        const {
-            project_title,
-            description,
-            install,
-            usage,
-            contributions,
-            test,
-            ...READMEdata
-        } = pageData.projectInfo[0]
+    # Installation
+    ${installInfo}
 
-        // console.log(project_title)
-        // console.log(description)
+    `;
+}
+const createUsage = usageInfo => {
+    if (!usageInfo) {
+        return ``;
+    }
+    return `
 
+    # Usage
+    ${usageInfo}
 
-        // console.log(git_username)
-        // console.log(email)
-        // console.log(git_url)
-        return `
-    #${project_title}
+    `;
+}
+// const createLicense = licenseInfo => {
+//     if (!licenseInfo) {
+//         return ``;
+//     }
+//     return `
+//     # License
+//     ${licenseInfo}
+//     `;
+// }
+const createTests = testInfo => {
+    if (!testInfo) {
+        return ``;
+    }
+    return `
+
+    # Tests
+    ${testInfo}
+
+    `;
+}
+
+module.exports = pageData => {
+    //destructure user data
+    const {
+        git_username,
+        email,
+        git_url,
+        ...questions
+    } = pageData
+    // destructure project data
+    const {
+        project_title,
+        description,
+        install,
+        usage,
+        contributions,
+        test,
+        ...READMEdata
+    } = pageData.projectInfo[0]
+
+    return `
+    # ${project_title}
 
     # Description
     ${description}
@@ -37,24 +73,17 @@
     * [Contributions](#contributions)
     * [Testing](#testing)
     * [Questions](#questions)
-
-    # Installation
-    ${install}
-
-    # Usage
-    ${usage}
-
+    ${createInstall(install)}
+    ${createUsage(usage)}
     # License
-    
-
-    # Contributions
+    $ {createLicense(license)}
+    fix this :)
+    ${createTests(test)}
+    # Contributing
     ${contributions}
-
-    # Testing
-    ${test}
 
     # Questions
     If you have any questions please contact me at ${email}.
     You can also visit my GitHub profile by clicking [here.](https://github.com/${git_username}).
 `;
-    };
+};
