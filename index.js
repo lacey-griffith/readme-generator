@@ -177,7 +177,23 @@ const projectQuestions = userData => {
                 name: 'licensing',
                 type: 'checkbox',
                 message: 'Select license(s) for this project.',
-                choices: ['MIT', 'Apache', 'Boost', 'Eclipse', 'ISC', 'None']
+                choices: [{
+                    name: 'MIT',
+                    image: 'imageurl',
+                    description: 'licensedescribe'
+                }, {
+                    name: 'Apache',
+                    image: 'imageurl',
+                    description: 'description'
+                }, {
+                    name: 'Boost',
+                    image: 'imageurl',
+                    description: 'description'
+                }, {
+                    name: 'ISC',
+                    image: 'imageurl',
+                    description: 'description'
+                }]
             }, {
                 name: 'site_image',
                 type: 'input',
