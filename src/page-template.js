@@ -60,6 +60,8 @@ module.exports = pageData => {
         ...READMEdata
     } = pageData.projectInfo[0]
 
+    console.log(pageData.projectInfo[0].licensing)
+
     return `
     # ${project_title}
 

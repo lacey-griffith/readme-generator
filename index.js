@@ -181,13 +181,7 @@ const projectQuestions = userData => {
             }, {
                 name: 'site_image',
                 type: 'input',
-                message: 'To include a site image, enter the image path:'
-            },
-            {
-                name: 'addREADME',
-                type: 'confirm',
-                message: 'Would you like to create another README.md?',
-                default: false
+                message: 'To include a site image, enter the image path or press enter to skip.'
             }
         ])
         .then(readmeData => {
@@ -204,7 +198,7 @@ userQuestions()
     .then(projectQuestions)
     .then(userData => {
         const readme = generateReadMe(userData)
-        fs.writeFile('README.md', readme, err => {
+        fs.writeFile("README.md", readme, err => {
             if (err) throw err;
             console.log(userData)
             console.log("README.md created!");
