@@ -8,58 +8,72 @@
 // x Questions (includes [x] github user-name and [x] link to repo
 // x email address as a contact solution
 
+// const { SSL_OP_LEGACY_SERVER_CONNECT } = require('constants');
 const fs = require('fs')
 const inquirer = require('inquirer')
 const generateReadMe = require('./src/page-template')
 
-const mockData = {
-    git_username: 'lacey-griffith',
-    git_url: 'www.github.com/lacey-griffith',
-    email: 'lacey.griffith@g.austincc.edu',
-    projectInfo: [{
-        project_title: 'Read Me Gen'
-    }]
-}
+// MOCK DATA 
+// const mockData = {
+//     git_username: 'lacey',
+//     git_url: 'www.github.com/lacey-griffith/readme-generator',
+//     email: 'lacey.griffith04@gmail.com',
+//     projectInfo: [{
+//         project_title: 'ReadMe Generator',
+//         descriptionConfirm: true,
+//         description: 'A project to generate README.md files for users',
+//         installConfirm: true,
+//         install: 'This is how you would install this application',
+//         usageConfirm: true,
+//         usage: 'This is usage information for ReadMe Generator',
+//         contributions: 'Lacey Griffith made contributions',
+//         testConfirm: true,
+//         test: 'this is testing information for ReadMe Generator',
+//         licensing: [Array],
+//         site_image: 'ok',
+//         addREADME: false
+//     }]
+// }
 
-// const userQuestions = () => {
-//     return inquirer.prompt([{
-//         name: 'git_username',
-//         type: 'input',
-//         message: 'Enter your GitHub username:',
-//         validate: gitHubNameInput => {
-//             if (gitHubNameInput) {
-//                 return true
-//             } else {
-//                 console.log('Enter your GitHub username!')
-//                 return false
-//             }
-//         }
-//     }, {
-//         name: 'git_url',
-//         type: 'input',
-//         message: 'Enter your GitHub project URL: ',
-//         validate: projectURLInput => {
-//             if (projectURLInput) {
-//                 return true
-//             } else {
-//                 console.log('Enter your project URL!')
-//                 return false
-//             }
-//         }
-//     }, {
-//         name: 'email',
-//         type: 'input',
-//         message: 'Enter your email address:',
-//         validate: emailInput => {
-//             if (emailInput) {
-//                 return true
-//             } else {
-//                 console.log('Enter your email address!')
-//                 return false
-//             }
-//         }
-//     }])
-// };
+const userQuestions = () => {
+    return inquirer.prompt([{
+        name: 'git_username',
+        type: 'input',
+        message: 'Enter your GitHub username:',
+        validate: gitHubNameInput => {
+            if (gitHubNameInput) {
+                return true
+            } else {
+                console.log('Enter your GitHub username!')
+                return false
+            }
+        }
+    }, {
+        name: 'git_url',
+        type: 'input',
+        message: 'Enter your GitHub project URL: ',
+        validate: projectURLInput => {
+            if (projectURLInput) {
+                return true
+            } else {
+                console.log('Enter your project URL!')
+                return false
+            }
+        }
+    }, {
+        name: 'email',
+        type: 'input',
+        message: 'Enter your email address:',
+        validate: emailInput => {
+            if (emailInput) {
+                return true
+            } else {
+                console.log('Enter your email address!')
+                return false
+            }
+        }
+    }])
+};
 
 const projectQuestions = userData => {
     if (!userData.projectInfo) {
@@ -186,15 +200,16 @@ const projectQuestions = userData => {
         })
 };
 
-// userQuestions()
-//     .then(projectQuestions)
-//     .then(userData => {
-//         const readme = generateReadMe(userData)
-
-//         fs.writeFile('README.md', readme, err => {
-//             if (err) throw err;
-//             console.log("README.md created!");
-//         });
-//     });
-
-const readme = generateReadMe(mockData)
+userQuestions()
+    .then(projectQuestions)
+    .then(userData => {
+        const readme = generateReadMe(userData)
+        fs.writeFile('README.md', readme, err => {
+            if (err) throw err;
+            console.log(userData)
+            console.log("README.md created!");
+        });
+    });
+//
+// MOCK DATA 
+//const readme = generateReadMe(mockData)

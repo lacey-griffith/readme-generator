@@ -1,40 +1,60 @@
-module.exports = pageData => {
-    const {
-        git_username,
-        email,
-        git_url,
-        ...questions
-    } = pageData
+    module.exports = pageData => {
+        //console.log(pageData)
+        const {
+            git_username,
+            email,
+            git_url,
+            ...questions
+        } = pageData
 
-    // console.log(git_username)
-    // console.log(email)
-    // console.log(git_url)
-    return `
-    #${pageData.projectInfo.project_title}
+        const {
+            project_title,
+            description,
+            install,
+            usage,
+            contributions,
+            test,
+            ...READMEdata
+        } = pageData.projectInfo[0]
 
-    **Description**
-    ${pageData.projectInfo.description}
-
-    **Table Of Contents**
-
-
-    **Installation**
-
-
-    **Usage**
+        // console.log(project_title)
+        // console.log(description)
 
 
-    **License**
+        // console.log(git_username)
+        // console.log(email)
+        // console.log(git_url)
+        return `
+    #${project_title}
 
+    # Description
+    ${description}
 
-    **Contributions**
+    # Table Of Contents
+    * [Installation](#installation)
+    * [Usage](#usage)
+    * [License](#license)
+    * [Contributions](#contributions)
+    * [Testing](#testing)
+    * [Questions](#questions)
 
+    # Installation
+    ${install}
 
-    **Testing**
+    # Usage
+    ${usage}
 
+    # License
+    
 
-    **Questions**
+    # Contributions
+    ${contributions}
+
+    # Testing
+    ${test}
+
+    # Questions
     If you have any questions please contact me at ${email}.
     You can also visit my GitHub profile by clicking [here.](https://github.com/${git_username}).
 `;
-};
+    };
