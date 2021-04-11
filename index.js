@@ -174,26 +174,24 @@ const projectQuestions = userData => {
                 }
             },
             {
+                name: 'licenseConfirm',
+                type: 'confirm',
+                message: 'Would you like to include a license?'
+            },
+            {
                 name: 'licensing',
                 type: 'checkbox',
                 message: 'Select license(s) for this project.',
-                choices: [{
-                    name: 'MIT',
-                    image: 'imageurl',
-                    description: 'licensedescribe'
-                }, {
-                    name: 'Apache',
-                    image: 'imageurl',
-                    description: 'description'
-                }, {
-                    name: 'Boost',
-                    image: 'imageurl',
-                    description: 'description'
-                }, {
-                    name: 'ISC',
-                    image: 'imageurl',
-                    description: 'description'
-                }]
+                choices: ['MIT', 'Apache', 'Boost', 'ISC'],
+                when: ({
+                    licenseConfirm
+                }) => {
+                    if (licenseConfirm) {
+                        return true
+                    } else {
+                        return false
+                    }
+                }
             }, {
                 name: 'site_image',
                 type: 'input',
@@ -218,6 +216,8 @@ userQuestions()
             if (err) throw err;
             console.log(userData)
             console.log("README.md created!");
+            console.log("=================")
+            console.log(userData.projectInfo[0].licensing)
         });
     });
 //

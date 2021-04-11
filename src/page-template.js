@@ -3,10 +3,8 @@ const createInstall = installInfo => {
         return ``;
     }
     return `
-
     # Installation
     ${installInfo}
-
     `;
 }
 const createUsage = usageInfo => {
@@ -14,30 +12,34 @@ const createUsage = usageInfo => {
         return ``;
     }
     return `
-
     # Usage
     ${usageInfo}
-
     `;
 }
-// const createLicense = licenseInfo => {
-//     if (!licenseInfo) {
-//         return ``;
-//     }
-//     return `
-//     # License
-//     ${licenseInfo}
-//     `;
-// }
+const createLicense = licenseInfo => {
+    if (!licenseInfo) {
+        return ``
+    }
+    if (licenseInfo === 'MIT') {
+        return `
+            # License
+            this is the MIT License
+            `;
+    }
+    if (licenseInfo === 'Boost') {
+        return `
+            # License
+            this is the Boost License
+            `;
+    }
+}
 const createTests = testInfo => {
     if (!testInfo) {
         return ``;
     }
     return `
-
     # Tests
     ${testInfo}
-
     `;
 }
 
@@ -59,6 +61,11 @@ module.exports = pageData => {
         test,
         ...READMEdata
     } = pageData.projectInfo[0]
+    //destructure project license data
+    const {
+        licensing,
+        ...licenseData
+    } = pageData.projectInfo[0].licensing
 
     return `
     # ${project_title}
@@ -75,9 +82,7 @@ module.exports = pageData => {
     * [Questions](#questions)
     ${createInstall(install)}
     ${createUsage(usage)}
-    # License
-    $ {createLicense(license)}
-    fix this :)
+    ${createLicense(licensing)}
     ${createTests(test)}
     # Contributing
     ${contributions}
