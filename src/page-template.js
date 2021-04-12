@@ -20,18 +20,10 @@ const createLicense = licenseInfo => {
     if (!licenseInfo) {
         return ``
     }
-    if (licenseInfo === 'MIT') {
-        return `
-            # License
-            this is the MIT License
-            `;
-    }
-    if (licenseInfo === 'Boost') {
-        return `
-            # License
-            this is the Boost License
-            `;
-    }
+    return `
+    # Licensing
+    ${licenseInfo}
+    `;
 }
 const createTests = testInfo => {
     if (!testInfo) {
@@ -43,30 +35,19 @@ const createTests = testInfo => {
     `;
 }
 
-module.exports = pageData => {
-    //destructure user data
-    const {
-        git_username,
-        email,
-        git_url,
-        ...questions
-    } = pageData
-    // destructure project data
+module.exports = data => {
+    console.log(data.licensing)
     const {
         project_title,
         description,
         install,
         usage,
-        contributions,
-        test,
-        ...READMEdata
-    } = pageData.projectInfo[0]
-    //destructure project license data
-    const {
         licensing,
-        ...licenseData
-    } = pageData.projectInfo[0].licensing
-
+        test,
+        contributions,
+        email,
+        git_username
+    } = data
     return `
     # ${project_title}
 
@@ -86,7 +67,7 @@ module.exports = pageData => {
     ${createTests(test)}
     # Contributing
     ${contributions}
-
+    
     # Questions
     If you have any questions please contact me at ${email}.
     You can also visit my GitHub profile by clicking [here.](https://github.com/${git_username}).
