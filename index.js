@@ -16,7 +16,7 @@ const userQuestions = () => {
     return inquirer.prompt([{
             name: 'git_username',
             type: 'input',
-            message: 'Enter your GitHub username:',
+            message: 'Enter your GitHub username: [Required]',
             validate: gitHubNameInput => {
                 if (gitHubNameInput) {
                     return true
@@ -28,7 +28,7 @@ const userQuestions = () => {
         }, {
             name: 'git_url',
             type: 'input',
-            message: 'Enter your GitHub project URL: ',
+            message: 'Enter your GitHub project URL: [Required]',
             validate: projectURLInput => {
                 if (projectURLInput) {
                     return true
@@ -40,7 +40,7 @@ const userQuestions = () => {
         }, {
             name: 'email',
             type: 'input',
-            message: 'Enter your email address:',
+            message: 'Enter your email address: [Required]',
             validate: emailInput => {
                 if (emailInput) {
                     return true
@@ -126,20 +126,15 @@ const userQuestions = () => {
                 }
             }
         },{
-            name: 'licenseConfirm',
-            type: 'confirm',
-            message: 'Would you like to include a license?'
-        },{
             name: 'licensing',
             type: 'checkbox',
-            message: 'Select license(s) for this project.',
+            message: 'Select license(s) for this project. [Required]',
             choices: ['MIT', 'Apache', 'Boost', 'ISC', 'None'],
-            when: ({
-                licenseConfirm
-            }) => {
-                if (licenseConfirm) {
+            validate: licenseInput => {
+                if(licenseInput) {
                     return true
                 } else {
+                    console.log('Please choose an option!')
                     return false
                 }
             }

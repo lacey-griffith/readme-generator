@@ -16,14 +16,26 @@ const createUsage = usageInfo => {
     ${usageInfo}
     `;
 }
-const createLicense = licenseInfo => {
-    if (!licenseInfo) {
-        return ``
+const checkLicense = license => {
+    if(!license) {
+        return ``;
     }
-    return `
-    # Licensing
-    ${licenseInfo}
-    `;
+    switch(license) {
+        case 'MIT':
+        return '![SiteImage](MIT)';
+
+        case 'Apache':
+        return '![SiteImage](Apache)';
+
+        case 'Boost':
+        return '![SiteImage](Boost)';
+
+        case 'ISC':
+        return '![SiteImage](ISC)';
+
+        case 'None':
+        return ``;
+    }
 }
 const createTests = testInfo => {
     if (!testInfo) {
@@ -37,6 +49,7 @@ const createTests = testInfo => {
 
 module.exports = data => {
     console.log(data.licensing)
+    
     const {
         project_title,
         description,
@@ -49,6 +62,7 @@ module.exports = data => {
         git_username
     } = data
     return `
+    ${checkLicense(licensing)}
     # ${project_title}
 
     # Description
@@ -63,7 +77,9 @@ module.exports = data => {
     * [Questions](#questions)
     ${createInstall(install)}
     ${createUsage(usage)}
-    ${createLicense(licensing)}
+    # Licensing
+    This project is covered under the following licenses:
+    ${licensing}
     ${createTests(test)}
     # Contributing
     ${contributions}
