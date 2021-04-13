@@ -17,26 +17,14 @@ const createUsage = usageInfo => {
     `;
 }
 const checkLicense = license => {
-    if(!license) {
+    if (license === 'None') {
         return ``;
+    } else {
+        // for (let lic of license) {
+        return `
+[![License: $](https://img.shields.io/badge/License-${license}-yellow.svg)](https://opensource.org/licenses/${license})`
+            }
     }
-    switch(license) {
-        case 'MIT':
-        return '![SiteImage](MIT)';
-
-        case 'Apache':
-        return '![SiteImage](Apache)';
-
-        case 'Boost':
-        return '![SiteImage](Boost)';
-
-        case 'ISC':
-        return '![SiteImage](ISC)';
-
-        case 'None':
-        return ``;
-    }
-}
 const createTests = testInfo => {
     if (!testInfo) {
         return ``;

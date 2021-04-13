@@ -1,12 +1,3 @@
-// x TITLE
-// x Description
-// x Installation instructions
-// x Usage Information
-// x Contribution Guidelines
-// x Test instruction
-// x license options
-// x Questions (includes [x] github user-name and [x] link to repo
-// x email address as a contact solution
 
 const fs = require('fs')
 const inquirer = require('inquirer')
@@ -127,9 +118,9 @@ const userQuestions = () => {
             }
         },{
             name: 'licensing',
-            type: 'checkbox',
-            message: 'Select license(s) for this project. [Required]',
-            choices: ['MIT', 'Apache', 'Boost', 'ISC', 'None'],
+            type: 'list',
+            message: 'Select a license for this project, if no license select "None". [Required]',
+            choices: ['MIT','Apache','Boost','ISC','None'],
             validate: licenseInput => {
                 if(licenseInput) {
                     return true
@@ -148,9 +139,8 @@ const userQuestions = () => {
 
 userQuestions()
     .then((userData) => {
-        console.log(userData, "190")
         const readme = generateReadMe(userData)
-        fs.writeFile("README.md", readme, err => {
+        fs.writeFile("./dist/README.md", readme, err => {
             if (err) throw err;
             console.log("README.md created!");
             console.log("=================")
