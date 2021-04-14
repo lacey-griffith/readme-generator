@@ -19,6 +19,7 @@ Verify that Node.js is installed on your system. Then you can clone the reposito
 
 # Usage
 To use the application, follow install instructions and then, in the root of the directory run 'node index' in the command line. Answer the prompts and once completed the README.md file will appear in the dist/ folder.
+Click [here](https://drive.google.com/file/d/1etH_yvBZJDwedpjUHWfiDZKUymTM5lTR/view?usp=sharing) to watch the walkthrough video.
 
 # Licensing
 This project is covered under the following licenses:
