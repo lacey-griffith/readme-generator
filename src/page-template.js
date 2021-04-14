@@ -72,7 +72,6 @@ ${licensing}
 ${createTests(test)}
 # Contributing
 ${contributions}
-${git_url}
 
 # Questions
 If you have any questions please contact me at ${email}.
