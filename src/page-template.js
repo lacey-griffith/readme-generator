@@ -1,20 +1,14 @@
 const createInstall = installInfo => {
     if (!installInfo) {
-        return ``;
+        return `No installation instructions provided.`;
     }
-    return `
-# Installation
-${installInfo}
-`;
+    return `${installInfo}`;
 }
 const createUsage = usageInfo => {
     if (!usageInfo) {
-        return ``;
+        return `No usage instructions provided.`;
     }
-    return `
-# Usage
-${usageInfo}
-`;
+    return `${usageInfo}`;
 }
 const checkLicense = license => {
     if (license === 'None') {
@@ -27,12 +21,9 @@ const checkLicense = license => {
     }
 const createTests = testInfo => {
     if (!testInfo) {
-        return ``;
+        return `No testing information provided.`;
     }
-    return `
-# Tests
-${testInfo}
-`;
+    return `${testInfo}`;
 }
 
 module.exports = data => {
@@ -64,13 +55,21 @@ ${description}
 * [Contributions](#contributions)
 * [Testing](#testing)
 * [Questions](#questions)
+
+# Installation
 ${createInstall(install)}
+
+# Usage
 ${createUsage(usage)}
-# Licensing
+
+# License
 This project is covered under the following licenses:
 ${licensing}
+
+# Testing
 ${createTests(test)}
-# Contributing
+
+# Contributions
 ${contributions}
 
 # Questions
